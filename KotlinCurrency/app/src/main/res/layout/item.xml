@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/currencytxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/codetxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/currencytxt"
+        app:layout_constraintStart_toStartOf="@+id/currencytxt"
+        app:layout_constraintTop_toBottomOf="@+id/currencytxt" />
+
+    <TextView
+        android:id="@+id/midtxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/codetxt"
+        app:layout_constraintStart_toStartOf="@+id/codetxt"
+        app:layout_constraintTop_toBottomOf="@+id/codetxt" />
+
+</android.support.constraint.ConstraintLayout>
