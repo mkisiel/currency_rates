@@ -1,6 +1,6 @@
 package com.example.patrycja.kotlincurrency
 
-data class Currency(
+data class Table(
     val effectiveDate: String,
     val no: String,
     val rates: List<Rate>,
