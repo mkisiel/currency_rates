@@ -20,11 +20,13 @@ public class DownloadDataTask extends AsyncTask<Void, Boolean, Rate> {
     //konstruktor i instancja retrofita
     public DownloadDataTask(DownloadDataTaskCallback taskCallback) {
         Log.d(TAG, "DownloadDataTask: ");
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.nbp.pl")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        this.apiCurrency = retrofit.create(InterfaceCurrency.class);
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://api.nbp.pl")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        this.apiCurrency = retrofit.create(InterfaceCurrency.class);
+
+        apiCurrency = AppSingleton.getInstance().getInterfaceCurrency();
 
         this.taskCallback = taskCallback;
     }

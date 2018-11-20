@@ -38,13 +38,15 @@ class MainActivity : AppCompatActivity() {
         list_currencies.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         list_currencies.adapter = currencyAdapter
 
-        val retrofit : Retrofit = Retrofit.Builder()
-                .baseUrl("http://api.nbp.pl")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
+//        val retrofit : Retrofit = Retrofit.Builder()
+//                .baseUrl("http://api.nbp.pl")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                .build()
+//
+//        val apiCurrency = retrofit.create(InterfaceCurrency::class.java)
 
-        val apiCurrency = retrofit.create(InterfaceCurrency::class.java)
+        val apiCurrency = AppSingleton.getInstance().getInterfaceCurrency()
 
         apiCurrency.getTableA()
                 .subscribeOn(Schedulers.io())
