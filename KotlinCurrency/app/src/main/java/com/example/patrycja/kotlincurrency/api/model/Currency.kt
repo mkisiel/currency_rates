@@ -1,4 +1,4 @@
-package com.example.patrycja.kotlincurrency.model
+package com.example.patrycja.kotlincurrency.api.model
 
 data class Table(
         val effectiveDate: String,

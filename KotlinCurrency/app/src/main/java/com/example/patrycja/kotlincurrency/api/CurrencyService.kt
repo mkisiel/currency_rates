@@ -1,8 +1,7 @@
 package com.example.patrycja.kotlincurrency.api
 
-import com.example.patrycja.kotlincurrency.model.Table
+import com.example.patrycja.kotlincurrency.api.model.Table
 import io.reactivex.Observable
-import retrofit2.Call
 import retrofit2.http.GET
 
 interface CurrencyService {

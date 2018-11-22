@@ -5,8 +5,8 @@ import android.util.Log;
 
 import com.example.patrycja.kotlincurrency.api.CurrencyService;
 import com.example.patrycja.kotlincurrency.api.RestClient;
-import com.example.patrycja.kotlincurrency.model.Rate;
-import com.example.patrycja.kotlincurrency.model.Table;
+import com.example.patrycja.kotlincurrency.api.model.Rate;
+import com.example.patrycja.kotlincurrency.api.model.Table;
 
 import java.util.List;
 

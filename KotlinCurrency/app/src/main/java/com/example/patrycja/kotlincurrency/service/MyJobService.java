@@ -8,7 +8,7 @@ import android.util.Log;
 import com.example.patrycja.kotlincurrency.DownloadDataTask;
 import com.example.patrycja.kotlincurrency.DownloadDataTaskCallback;
 import com.example.patrycja.kotlincurrency.NotificationHelper;
-import com.example.patrycja.kotlincurrency.model.Rate;
+import com.example.patrycja.kotlincurrency.api.model.Rate;
 
 public class MyJobService extends JobService {
 

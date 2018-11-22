@@ -1,4 +1,4 @@
-package com.example.patrycja.kotlincurrency;
+package com.example.patrycja.kotlincurrency.viewmodel;
 
 
 import android.arch.lifecycle.LiveData;
@@ -7,7 +7,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.patrycja.kotlincurrency.api.CurrencyService;
 import com.example.patrycja.kotlincurrency.api.RestClient;
-import com.example.patrycja.kotlincurrency.model.Table;
+import com.example.patrycja.kotlincurrency.api.model.Table;
 
 import java.util.List;
 

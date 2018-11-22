@@ -15,7 +15,7 @@
             android:name=".service.MyJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:exported="true"/>
-        <activity android:name=".controller.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

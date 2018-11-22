@@ -1,4 +1,4 @@
-package com.example.patrycja.kotlincurrency.controller
+package com.example.patrycja.kotlincurrency
 
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
@@ -15,11 +15,10 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 
 import android.arch.lifecycle.ViewModelProviders
-import com.example.patrycja.kotlincurrency.CurrencyViewModel
+import com.example.patrycja.kotlincurrency.viewmodel.CurrencyViewModel
 import com.example.patrycja.kotlincurrency.service.MyJobService
-import com.example.patrycja.kotlincurrency.R
-import com.example.patrycja.kotlincurrency.model.Rate
-import com.example.patrycja.kotlincurrency.model.Table
+import com.example.patrycja.kotlincurrency.api.model.Rate
+import com.example.patrycja.kotlincurrency.api.model.Table
 
 
 class MainActivity : AppCompatActivity() {
