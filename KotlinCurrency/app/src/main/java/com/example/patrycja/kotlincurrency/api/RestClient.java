@@ -1,25 +1,23 @@
-package com.example.patrycja.kotlincurrency;
-
-import com.example.patrycja.kotlincurrency.api.InterfaceCurrency;
+package com.example.patrycja.kotlincurrency.api;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class AppSingleton {
+public class RestClient {
 
-    private static AppSingleton instance = null;
-    private InterfaceCurrency interfaceCurrency;
+    private static RestClient instance = null;
+    private CurrencyService currencyService;
     public static final String BASE_URL = "http://api.nbp.pl";
 
-    public static AppSingleton getInstance() {
+    public static RestClient getInstance() {
         if (instance == null) {
-            instance = new AppSingleton();
+            instance = new RestClient();
         }
         return instance;
     }
 
-    private AppSingleton() {
+    private RestClient() {
         buildRetrofit();
     }
 
@@ -29,11 +27,11 @@ public class AppSingleton {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        this.interfaceCurrency = retrofit.create(InterfaceCurrency.class);
+        this.currencyService = retrofit.create(CurrencyService.class);
     }
 
-    public InterfaceCurrency getInterfaceCurrency() {
-        return this.interfaceCurrency;
+    public CurrencyService getCurrencyService() {
+        return this.currencyService;
     }
 
 }

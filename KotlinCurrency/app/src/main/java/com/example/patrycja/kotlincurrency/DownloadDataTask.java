@@ -3,7 +3,8 @@ package com.example.patrycja.kotlincurrency;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.patrycja.kotlincurrency.api.InterfaceCurrency;
+import com.example.patrycja.kotlincurrency.api.CurrencyService;
+import com.example.patrycja.kotlincurrency.api.RestClient;
 import com.example.patrycja.kotlincurrency.model.Rate;
 import com.example.patrycja.kotlincurrency.model.Table;
 
@@ -16,13 +17,13 @@ public class DownloadDataTask extends AsyncTask<Void, Void, Rate> {
     private static final String TAG = DownloadDataTask.class.getSimpleName();
     private static final String USD_CODE = "USD";
 
-    private InterfaceCurrency apiCurrency;
+    private CurrencyService apiCurrency;
     private DownloadDataTaskCallback taskCallback;
 
     //konstruktor i instancja retrofita
     public DownloadDataTask(DownloadDataTaskCallback taskCallback) {
         Log.d(TAG, "DownloadDataTask: ");
-        apiCurrency = AppSingleton.getInstance().getInterfaceCurrency();
+        apiCurrency = RestClient.getInstance().getCurrencyService();
         this.taskCallback = taskCallback;
     }
 

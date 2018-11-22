@@ -5,7 +5,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.example.patrycja.kotlincurrency.api.InterfaceCurrency;
+import com.example.patrycja.kotlincurrency.api.CurrencyService;
+import com.example.patrycja.kotlincurrency.api.RestClient;
 import com.example.patrycja.kotlincurrency.model.Table;
 
 import java.util.List;
@@ -26,8 +27,8 @@ public class CurrencyViewModel extends ViewModel {
     }
 
     private void loadTable(){
-        InterfaceCurrency interfaceCurrency = AppSingleton.getInstance().getInterfaceCurrency();
-        interfaceCurrency.getTableA()
+        CurrencyService currencyService = RestClient.getInstance().getCurrencyService();
+        currencyService.getTableA()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Table>>() {
