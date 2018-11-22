@@ -1,5 +1,7 @@
 package com.example.patrycja.kotlincurrency;
 
+import com.example.patrycja.kotlincurrency.api.InterfaceCurrency;
+
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -8,7 +10,7 @@ public class AppSingleton {
 
     private static AppSingleton instance = null;
     private InterfaceCurrency interfaceCurrency;
-    private static final String BASE_URL = "http://api.nbp.pl";
+    public static final String BASE_URL = "http://api.nbp.pl";
 
     public static AppSingleton getInstance() {
         if (instance == null) {

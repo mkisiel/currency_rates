@@ -1,13 +1,18 @@
-package com.example.patrycja.kotlincurrency;
+package com.example.patrycja.kotlincurrency.service;
 
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.util.Log;
 
+import com.example.patrycja.kotlincurrency.DownloadDataTask;
+import com.example.patrycja.kotlincurrency.DownloadDataTaskCallback;
+import com.example.patrycja.kotlincurrency.NotificationHelper;
+import com.example.patrycja.kotlincurrency.model.Rate;
+
 public class MyJobService extends JobService {
 
-    private static final String TAG = MyJobService.class.toString();
+    private static final String TAG = MyJobService.class.getSimpleName();
     private static final double MAX_RATE = 3.9;
     private static final double MIN_RATE = 3.7;
     private JobParameters params;
@@ -35,10 +40,14 @@ public class MyJobService extends JobService {
             //jeśli warunek spełniony - tworzenie notyfikacji
             //jeśli nie - finishJob
 
-            if(rate.getMid()>MAX_RATE || rate.getMid()<MIN_RATE){
+            if(rate.getMid()>MAX_RATE){
                 Log.d(TAG, "taskFinished: nice currency ");
                 NotificationHelper notification = new NotificationHelper(getApplicationContext());
-                notification.createNotification("Warning", "Recorded limit value for USD");
+                notification.createNotification("Warning", "The USD limit has exceeded the maximum limit");
+            } else if (rate.getMid()<MIN_RATE){
+                Log.d(TAG, "taskFinished: nice currency ");
+                NotificationHelper notification = new NotificationHelper(getApplicationContext());
+                notification.createNotification("Warning", "The USD limit has exceeded the minimum limit");
             }
 
             jobFinished(params, false);

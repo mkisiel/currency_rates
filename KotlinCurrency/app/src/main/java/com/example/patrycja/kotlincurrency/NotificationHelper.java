@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 
+import com.example.patrycja.kotlincurrency.controller.MainActivity;
+
 public class NotificationHelper {
 
     private Context mContext;
@@ -42,11 +44,9 @@ public class NotificationHelper {
         {
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "NOTIFICATION_CHANNEL", importance);
-            assert mNotificationManager != null;
             mBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
             mNotificationManager.createNotificationChannel(notificationChannel);
         }
-        assert mNotificationManager != null;
         mNotificationManager.notify(0, mBuilder.build());
     }
 }

@@ -1,7 +1,8 @@
-package com.example.patrycja.kotlincurrency
+package com.example.patrycja.kotlincurrency.controller
 
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
+import android.arch.lifecycle.Observer
 import android.content.ComponentName
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
@@ -11,14 +12,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import android.arch.lifecycle.ViewModelProviders
+import com.example.patrycja.kotlincurrency.CurrencyViewModel
+import com.example.patrycja.kotlincurrency.service.MyJobService
+import com.example.patrycja.kotlincurrency.R
+import com.example.patrycja.kotlincurrency.model.Rate
+import com.example.patrycja.kotlincurrency.model.Table
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,25 +40,6 @@ class MainActivity : AppCompatActivity() {
         list_currencies.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         list_currencies.adapter = currencyAdapter
 
-//        val retrofit : Retrofit = Retrofit.Builder()
-//                .baseUrl("http://api.nbp.pl")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                .build()
-//
-//        val apiCurrency = retrofit.create(InterfaceCurrency::class.java)
-
-        val apiCurrency = AppSingleton.getInstance().getInterfaceCurrency()
-
-        apiCurrency.getTableA()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    currencyAdapter.setCurrency(it[0].rates) },
-                        {
-                            Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
-                        })
-
         val jobScheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
         jobScheduler.schedule(JobInfo.Builder(MY_JOB_ID,
                 ComponentName(this, MyJobService::class.java))
@@ -64,6 +47,13 @@ class MainActivity : AppCompatActivity() {
                 .setPeriodic(DAY_IN_MILLS.toLong())
                 .setBackoffCriteria((10 * MINUTE_IN_MILLIS).toLong(), JobInfo.BACKOFF_POLICY_LINEAR)
                 .build())
+
+        val myViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
+        myViewModel.table.observe(this, Observer<List<Table>>{ table ->
+            if (table != null) {
+                currencyAdapter.setCurrency(table[0].rates)
+            }
+        })
     }
 
     inner class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
