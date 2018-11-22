@@ -12,13 +12,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
 
 import android.arch.lifecycle.ViewModelProviders
 import com.example.patrycja.kotlincurrency.viewmodel.CurrencyViewModel
 import com.example.patrycja.kotlincurrency.service.MyJobService
 import com.example.patrycja.kotlincurrency.api.model.Rate
-import com.example.patrycja.kotlincurrency.api.model.Table
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,12 +46,11 @@ class MainActivity : AppCompatActivity() {
                 .setBackoffCriteria((10 * MINUTE_IN_MILLIS).toLong(), JobInfo.BACKOFF_POLICY_LINEAR)
                 .build())
 
-        val myViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
-        myViewModel.table.observe(this, Observer<List<Table>>{ table ->
-            if (table != null) {
-                currencyAdapter.setCurrency(table[0].rates)
-            }
+        val currencyViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
+        currencyViewModel.ratesLiveData.observe(this, Observer<List<Rate>>{ rates ->
+            currencyAdapter.setCurrency(rates)
         })
+        currencyViewModel.fetch()
     }
 
     inner class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
@@ -71,8 +69,11 @@ class MainActivity : AppCompatActivity() {
             holder.bindModel(currencyList[position])
         }
 
-        fun setCurrency(rates: List<Rate>) {
-            currencyList.addAll(rates)
+        fun setCurrency(rates: List<Rate>?) {
+            currencyList.clear()
+            if (rates != null) {
+                currencyList.addAll(rates)
+            }
             notifyDataSetChanged()
         }
 
